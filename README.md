@@ -1,2 +1,2 @@
 # Chronos
-Gerenciador de horas gastas em atividades
+Gerenciador de horas gastas em atividades!
