@@ -1,7 +1,7 @@
 @import "~src/assets/scss/main";
 
 .content {
-    background-color: rgba($color: $primary, $alpha: 0.45);
+    background-color: rgba($color: $primary, $alpha: 0.15);
     height: 100%;
 }
 
@@ -19,9 +19,15 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center; 
-    -webkit-filter: blur(1px);
-    -moz-filter: blur(1px);
-    -o-filter: blur(1px);
-    -ms-filter: blur(1px);
-    filter: blur(1px);
+    background-size:cover;
+    // -webkit-filter: blur(1px);
+    // -moz-filter: blur(1px);
+    // -o-filter: blur(1px);
+    // -ms-filter: blur(1px);
+    // filter: blur(1px);
+}
+
+.welcome-text {
+    color: #FFF;
+    font-weight: 500;
 }

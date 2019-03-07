@@ -1,11 +1,30 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="content background-image">
-  <div fxFlex="33" class="full-opacity">
+  <div fxFlex="25">
+    
+    <div class="welcome-text text-center m-b-sm">
+      Bem vindo ao Chronos Time Tracker
+    </div>
+
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-      </mat-card-header>
       <mat-card-content>
-        <form class="example-form">
+
+        <div fxLayout="column">
+          <div fxFlex class="text-center">
+            <mat-icon class="mat-icon-size-48 text-primary">lock</mat-icon>
+          </div>
+          <div fxFlex>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Username" name="username" required>
+            </mat-form-field>
+          </div>
+          <div fxFlex>
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Password" name="password" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- <form class="example-form">
           <table class="example-full-width" cellspacing="0">
             <tr>
               <td>
@@ -22,12 +41,15 @@
               </td>
             </tr>
           </table>
-        </form>
+        </form> -->
+
         <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button (click)="login()" color="primary">Login</button>
+        <button type="button" mat-flat-button (click)="login()" color="primary" class="m-r-sm">Login</button>
+        <button type="button" mat-stroked-button color="basic">Registrar-se</button>
       </mat-card-actions>
+
     </mat-card>
   </div>
 </div>
