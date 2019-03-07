@@ -1,0 +1,27 @@
+@import "~src/assets/scss/main";
+
+.content {
+    background-color: rgba($color: $primary, $alpha: 0.45);
+    height: 100%;
+}
+
+.content:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;  
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    background-image: url('~/assets/images/background/london-01.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+}
