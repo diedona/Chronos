@@ -1,4 +1,39 @@
-Olá mundo
+<div class="container h-100">
+
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-11 col-md-8 col-lg-4 mx-auto">
+
+      <form [formGroup]="userForm" (submit)="onSubmit()">
+        <mdb-card>
+          <mdb-card-body>
+            <mdb-card-title>
+              <h4>Chronos Time Tracker</h4>
+            </mdb-card-title>
+            <mdb-card-text> Se identifique para continuar</mdb-card-text>
+
+            <div class="md-form">
+              <input mdbInput mdbValidate type="text" id="username" class="form-control" formControlName="username" required>
+              <label for="username">Username</label>
+              <mdb-error *ngIf="userForm.touched && userForm.get('username').invalid">Campo Obrigatório</mdb-error>
+            </div>
+
+            <div class="md-form">
+              <input mdbInput mdbValidate type="password" id="password" class="form-control" formControlName="password" required>
+              <label for="password">Senha</label>
+              <mdb-error *ngIf="userForm.touched && userForm.get('password').invalid">Campo Obrigatório</mdb-error>
+            </div>
+
+          </mdb-card-body>
+          <mdb-card-footer>
+            <button mdbBtn type="submit" color="primary" mdbWavesEffect>Login</button>
+          </mdb-card-footer>
+        </mdb-card>
+      </form>
+
+    </div>
+  </div>
+
+</div>
 
 <!-- <div fxLayout="row" fxLayoutAlign="center center" class="content background-image">
     <div fxFlex="25" fxFlex.lt-md="60">
