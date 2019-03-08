@@ -6,29 +6,34 @@
       <form [formGroup]="userForm" (submit)="onSubmit()" #formDir="ngForm">
         <mdb-card>
           <mdb-card-body>
-            <mdb-card-title>
-              <h4>Chronos Time Tracker</h4>
+            <mdb-card-title class="text-center text-primary">
+              <h4>
+                  <mdb-icon fas icon="hourglass" class="mr-1"></mdb-icon>
+                  Chronos Time Tracker
+              </h4>
             </mdb-card-title>
-            <mdb-card-text> Se identifique para continuar</mdb-card-text>
+            <mdb-card-text class="text-center"> Se identifique para continuar</mdb-card-text>
 
-            <div class="md-form">
+            <div class="md-form" [class.invalid-form-control]="formDir.submitted && userForm.get('username').invalid">
               <input mdbInput type="text" id="username" class="form-control" formControlName="username" required>
-              <label for="username">Username</label>
+              <label for="username" class="required">Username</label>
             </div>
 
-            <div class="md-form">
+            <div class="md-form" [class.invalid-form-control]="formDir.submitted && userForm.get('password').invalid">
               <input mdbInput type="password" id="password" class="form-control" formControlName="password" required>
-              <label for="password">Senha</label>
+              <label for="password" class="required">Senha</label>
             </div>
 
-            <div class="md-form" *ngIf="formDir.submitted">
-              Este form já foi submetido!
+            <div class="md-form mb-0" *ngIf="formDir.submitted && userForm.invalid">
+              <div class="alert alert-danger" role="alert">
+                Preencha os dados do formulário corretamente!
+              </div>
             </div>
 
           </mdb-card-body>
           <mdb-card-footer>
-            <button mdbBtn mdbWavesEffect type="submit" size="sm" color="primary" >
-                <mdb-icon fas icon="sign-in-alt" class="mr-1"></mdb-icon>Login
+            <button mdbBtn mdbWavesEffect type="submit" size="sm" color="primary">
+              <mdb-icon fas icon="sign-in-alt" class="mr-1"></mdb-icon>Login
             </button>
             <button mdbBtn mdbWavesEffect type="submit" size="sm" color="primary" outline="true">
               <mdb-icon fas icon=""></mdb-icon>Registrar-se
