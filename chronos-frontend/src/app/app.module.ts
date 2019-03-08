@@ -1,11 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialImportsModule } from './shared/material-imports/material-imports.module';
 import { LayoutModule } from './shared/layout/layout.module';
 import { LoginModule } from './login/login.module';
 import { BaseModule } from './shared/base/base.module';
@@ -17,6 +15,7 @@ import { BaseModule } from './shared/base/base.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MDBBootstrapModule.forRoot(),
     BaseModule,
     LayoutModule,
     LoginModule

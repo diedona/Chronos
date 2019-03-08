@@ -1,44 +1,42 @@
-<div fxLayout="row" fxLayoutAlign="center center" class="content background-image">
-  <div fxFlex="25" fxFlex.lt-md="60">
+Olá mundo
 
-    <div class="welcome-text text-center m-b-sm">
-      Bem vindo ao Chronos Time Tracker
+<!-- <div fxLayout="row" fxLayoutAlign="center center" class="content background-image">
+    <div fxFlex="25" fxFlex.lt-md="60">
+  
+      <div class="welcome-text text-center m-b-sm">
+        Bem vindo ao Chronos Time Tracker
+      </div>
+  
+      <form [formGroup]="userForm" (submit)="onSubmit()">
+        <mat-card>
+  
+          <mat-card-content>
+            <div fxLayout="column">
+              <div fxFlex class="text-center">
+                <mat-icon class="mat-icon-size-48 text-primary">lock</mat-icon>
+              </div>
+              <div fxFlex>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Username" name="username" formControlName="username" required>
+                  <mat-error *ngIf="userForm.get('username').invalid">Campo obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex>
+                <mat-form-field class="full-width">
+                  <input matInput type="password" placeholder="Password" name="password" formControlName="password" required>
+                  <mat-error *ngIf="userForm.get('password').invalid">Campo obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+  
+          <mat-card-actions>
+            <button type="submit" mat-flat-button color="primary" class="m-r-sm">Login</button>
+            <button type="button" mat-stroked-button color="basic">Registrar-se</button>
+          </mat-card-actions>
+  
+        </mat-card>
+      </form>
+  
     </div>
-
-    <form [formGroup]="userForm" (submit)="onSubmit()">
-      <mat-card>
-
-        <mat-card-content>
-          <div fxLayout="column">
-            <div fxFlex class="text-center">
-              <mat-icon class="mat-icon-size-48 text-primary">lock</mat-icon>
-            </div>
-            <div fxFlex>
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Username" name="username" formControlName="username" required>
-                <mat-error *ngIf="userForm.get('username').invalid">Campo obrigatório</mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex>
-              <mat-form-field class="full-width">
-                <input matInput type="password" placeholder="Password" name="password" formControlName="password" required>
-                <mat-error *ngIf="userForm.get('password').invalid">Campo obrigatório</mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-        </mat-card-content>
-
-        <mat-card-actions>
-          <button type="submit" mat-flat-button color="primary" class="m-r-sm">Login</button>
-          <button type="button" mat-stroked-button color="basic">Registrar-se</button>
-        </mat-card-actions>
-
-      </mat-card>
-    </form>
-
-    <!-- <div>
-      <p>Username: {{userForm.value | json}}</p>
-    </div> -->
-
-  </div>
-</div>
+  </div> -->
