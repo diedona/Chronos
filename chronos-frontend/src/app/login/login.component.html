@@ -3,7 +3,7 @@
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-11 col-md-8 col-lg-4 mx-auto">
 
-      <form [formGroup]="userForm" (submit)="onSubmit()">
+      <form [formGroup]="userForm" (submit)="onSubmit()" #formDir="ngForm">
         <mdb-card>
           <mdb-card-body>
             <mdb-card-title>
@@ -12,20 +12,27 @@
             <mdb-card-text> Se identifique para continuar</mdb-card-text>
 
             <div class="md-form">
-              <input mdbInput mdbValidate type="text" id="username" class="form-control" formControlName="username" required>
+              <input mdbInput type="text" id="username" class="form-control" formControlName="username" required>
               <label for="username">Username</label>
-              <mdb-error *ngIf="userForm.touched && userForm.get('username').invalid">Campo Obrigatório</mdb-error>
             </div>
 
             <div class="md-form">
-              <input mdbInput mdbValidate type="password" id="password" class="form-control" formControlName="password" required>
+              <input mdbInput type="password" id="password" class="form-control" formControlName="password" required>
               <label for="password">Senha</label>
-              <mdb-error *ngIf="userForm.touched && userForm.get('password').invalid">Campo Obrigatório</mdb-error>
+            </div>
+
+            <div class="md-form" *ngIf="formDir.submitted">
+              Este form já foi submetido!
             </div>
 
           </mdb-card-body>
           <mdb-card-footer>
-            <button mdbBtn type="submit" color="primary" mdbWavesEffect>Login</button>
+            <button mdbBtn mdbWavesEffect type="submit" size="sm" color="primary" >
+                <mdb-icon fas icon="sign-in-alt" class="mr-1"></mdb-icon>Login
+            </button>
+            <button mdbBtn mdbWavesEffect type="submit" size="sm" color="primary" outline="true">
+              <mdb-icon fas icon=""></mdb-icon>Registrar-se
+            </button>
           </mdb-card-footer>
         </mdb-card>
       </form>
