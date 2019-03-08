@@ -1,5 +1,9 @@
 @import "_variables";
 
+.card {
+    opacity: 0.9;
+}
+
 .container:before {
     content: "";
     position: fixed;
