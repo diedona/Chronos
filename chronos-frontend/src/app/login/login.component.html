@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="content background-image">
-  <div fxFlex="25">
+  <div fxFlex="25" fxFlex.lt-md="60">
 
     <div class="welcome-text text-center m-b-sm">
       Bem vindo ao Chronos Time Tracker
@@ -16,11 +16,13 @@
             <div fxFlex>
               <mat-form-field class="full-width">
                 <input matInput placeholder="Username" name="username" formControlName="username" required>
+                <mat-error *ngIf="userForm.get('username').invalid">Campo obrigatório</mat-error>
               </mat-form-field>
             </div>
             <div fxFlex>
               <mat-form-field class="full-width">
                 <input matInput type="password" placeholder="Password" name="password" formControlName="password" required>
+                <mat-error *ngIf="userForm.get('password').invalid">Campo obrigatório</mat-error>
               </mat-form-field>
             </div>
           </div>
