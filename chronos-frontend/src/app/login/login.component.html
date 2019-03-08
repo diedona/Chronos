@@ -1,55 +1,42 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="content background-image">
   <div fxFlex="25">
-    
+
     <div class="welcome-text text-center m-b-sm">
       Bem vindo ao Chronos Time Tracker
     </div>
 
-    <mat-card>
-      <mat-card-content>
+    <form [formGroup]="userForm" (submit)="onSubmit()">
+      <mat-card>
 
-        <div fxLayout="column">
-          <div fxFlex class="text-center">
-            <mat-icon class="mat-icon-size-48 text-primary">lock</mat-icon>
+        <mat-card-content>
+          <div fxLayout="column">
+            <div fxFlex class="text-center">
+              <mat-icon class="mat-icon-size-48 text-primary">lock</mat-icon>
+            </div>
+            <div fxFlex>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Username" name="username" formControlName="username" required>
+              </mat-form-field>
+            </div>
+            <div fxFlex>
+              <mat-form-field class="full-width">
+                <input matInput type="password" placeholder="Password" name="password" formControlName="password" required>
+              </mat-form-field>
+            </div>
           </div>
-          <div fxFlex>
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Username" name="username" required>
-            </mat-form-field>
-          </div>
-          <div fxFlex>
-            <mat-form-field class="full-width">
-              <input matInput type="password" placeholder="Password" name="password" required>
-            </mat-form-field>
-          </div>
-        </div>
+        </mat-card-content>
 
-        <!-- <form class="example-form">
-          <table class="example-full-width" cellspacing="0">
-            <tr>
-              <td>
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Username" name="username" required>
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Password" type="password" name="password" required>
-                </mat-form-field>
-              </td>
-            </tr>
-          </table>
-        </form> -->
+        <mat-card-actions>
+          <button type="submit" mat-flat-button color="primary" class="m-r-sm">Login</button>
+          <button type="button" mat-stroked-button color="basic">Registrar-se</button>
+        </mat-card-actions>
 
-        <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-      </mat-card-content>
-      <mat-card-actions>
-        <button type="button" mat-flat-button (click)="login()" color="primary" class="m-r-sm">Login</button>
-        <button type="button" mat-stroked-button color="basic">Registrar-se</button>
-      </mat-card-actions>
+      </mat-card>
+    </form>
 
-    </mat-card>
+    <!-- <div>
+      <p>Username: {{userForm.value | json}}</p>
+    </div> -->
+
   </div>
 </div>

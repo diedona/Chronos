@@ -8,6 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialImportsModule } from './shared/material-imports/material-imports.module';
 import { LayoutModule } from './shared/layout/layout.module';
 import { LoginModule } from './login/login.module';
+import { BaseModule } from './shared/base/base.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +17,7 @@ import { LoginModule } from './login/login.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MaterialImportsModule,
+    BaseModule,
     LayoutModule,
     LoginModule
   ],
