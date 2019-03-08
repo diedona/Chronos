@@ -20,15 +20,15 @@
     color: $primary;
 }
 
-.mat-icon-size-18 { font-size: 18px; width: 18px; height: 18px; }
-.mat-icon-size-24 { font-size: 24px; width: 24px; height: 24px; }
-.mat-icon-size-36 { font-size: 36px; width: 36px; height: 36px; }
-.mat-icon-size-48 { font-size: 48px; width: 48px; height: 48px; }
+.mat-icon-size-18 { font-size: 18px!important; width: 18px!important; height: 18px!important; }
+.mat-icon-size-24 { font-size: 24px!important; width: 24px!important; height: 24px!important; }
+.mat-icon-size-36 { font-size: 36px!important; width: 36px!important; height: 36px!important; }
+.mat-icon-size-48 { font-size: 48px!important; width: 48px!important; height: 48px!important; }
 
-.m-r-sm { margin-right: 5px; }
-.m-r-md { margin-right: 10px; }
-.m-r-lg { margin-right: 15px; }
+.m-r-sm { margin-right: 5px!important; }
+.m-r-md { margin-right: 10px!important; }
+.m-r-lg { margin-right: 15px!important; }
 
-.m-b-sm { margin-bottom: 5px; }
-.m-b-md { margin-bottom: 10px; }
-.m-b-lg { margin-bottom: 15px; }
+.m-b-sm { margin-bottom: 5px!important; }
+.m-b-md { margin-bottom: 10px!important; }
+.m-b-lg { margin-bottom: 15px!important; }
