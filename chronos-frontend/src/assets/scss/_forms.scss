@@ -10,3 +10,9 @@
         border-bottom: 1px solid $validation-error;
     }
 }
+
+.hint-error {
+    color: $validation-error;
+    font-size: 0.8rem;
+    font-style: italic;
+}
