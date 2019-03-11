@@ -22,32 +22,32 @@ export class AppTitleService {
   ) { }
 
   startWatch(events: Observable<Event>): void {
-    this.subRouterEvents = events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .pipe(map(() => this.activatedRoute))
-      .pipe(map((route: ActivatedRoute) => {
+    this.subRouterEvents = events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => this.activatedRoute),
+      map((route: ActivatedRoute) => {
         while (route.firstChild) {
           //console.log('look:', route);
           route = route.firstChild;
         }
         return route;
-      }))
-      .pipe(filter((route) => route.outlet === 'primary'))
-      .pipe(mergeMap((route: ActivatedRoute) => route.data))
-      .subscribe((data) => {
-        let title = this.defaultTitle;
+      }),
+      filter((route) => route.outlet === 'primary'),
+      mergeMap((route: ActivatedRoute) => route.data)
+    ).subscribe((data) => {
+      let title = this.defaultTitle;
 
-        if (data.title) {
-          title = data.title;
-        }
+      if (data.title) {
+        title = data.title;
+      }
 
-        if (data.subtitle) {
-          title += data.subtitle;
-        }
+      if (data.subtitle) {
+        title += data.subtitle;
+      }
 
-        //console.log('this >>>', data);
-        this.titleService.setTitle(title);
-      });
+      //console.log('this >>>', data);
+      this.titleService.setTitle(title);
+    });
   }
 
   stopWatch() {
