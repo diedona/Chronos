@@ -2,19 +2,10 @@
     width: 100%;
 }
 
-.text-center {
-    text-align: center;
+footer.page-footer .footer-copyright {
+    color: #FFF;
 }
 
-.mat-icon-size-18 { font-size: 18px; width: 18px; height: 18px; }
-.mat-icon-size-24 { font-size: 24px; width: 24px; height: 24px; }
-.mat-icon-size-36 { font-size: 36px; width: 36px; height: 36px; }
-.mat-icon-size-48 { font-size: 48px; width: 48px; height: 48px; }
-
-.m-r-sm { margin-right: 5px; }
-.m-r-md { margin-right: 10px; }
-.m-r-lg { margin-right: 15px; }
-
-.m-b-sm { margin-bottom: 5px; }
-.m-b-md { margin-bottom: 10px; }
-.m-b-lg { margin-bottom: 15px; }
+.margin-header {
+    margin-top: 75px;
+}
