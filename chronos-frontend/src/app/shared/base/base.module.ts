@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ButtonsModule, WavesModule, CardsFreeModule, CheckboxModule, InputsModule, IconsModule, InputUtilitiesModule, NavbarModule } from 'angular-bootstrap-md'
+import { MdbootstrapImportsModule } from './mdbootstrap-imports/mdbootstrap-imports.module';
 
 const modules = [
   ReactiveFormsModule,
-  // MDB
-  ButtonsModule, WavesModule, CardsFreeModule,
-  CheckboxModule, InputsModule, IconsModule,
-  InputUtilitiesModule, NavbarModule
+  MdbootstrapImportsModule
 ];
 
 @NgModule({
