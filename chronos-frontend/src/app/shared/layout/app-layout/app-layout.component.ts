@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppLayoutComponent implements OnInit {
 
+  currentDate: number;
+
   constructor() { }
 
   ngOnInit() {
+    this.currentDate = Date.now();
   }
 
 }
