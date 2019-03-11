@@ -1,28 +1,24 @@
 <header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark blue scrolling-navbar">
-        <a class="navbar-brand" href="#">
-            <strong>
+    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark blue scrolling-navbar"
+        [containerInside]="false">
+        <mdb-navbar-brand>
+            <a class="logo navbar-brand" href="#">
                 <i class="fas fa-hourglass"></i> Chronos Time Tracker
-            </strong>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-flex-icons ml-auto">
+            </a>
+        </mdb-navbar-brand>
+        <links>
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link">
-                        diego.dona <i class="fas fa-user"></i>
+                        <i class="fas fa-user"></i> diego.dona
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link">
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i class="fas fa-sign-out-alt"></i> sair
                     </a>
                 </li>
             </ul>
-        </div>
-    </nav>
-
+        </links>
+    </mdb-navbar>
 </header>
