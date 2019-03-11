@@ -6,9 +6,9 @@ import { ApontamentosComponent } from './apontamentos/apontamentos.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent },
-  { path: 'projetos', component: ProjetosComponent },
-  { path: 'apontamentos', component: ApontamentosComponent }
+  { path: 'home', component: HomeComponent, data: { subtitle: 'Home'} },
+  { path: 'projetos', component: ProjetosComponent, data: { subtitle: 'Projetos'} },
+  { path: 'apontamentos', component: ApontamentosComponent, data: { subtitle: 'Apontamentos'} }
 ];
 
 @NgModule({
