@@ -14,15 +14,16 @@
             </mdb-card-title>
             <mdb-card-text class="text-center"> Se identifique para continuar</mdb-card-text>
 
-            <div class="md-form" [class.invalid-form-control]="formDir.submitted && userForm.get('username').invalid">
+            <div class="md-form">
               <input mdbInput type="text" id="username" class="form-control" formControlName="username" required>
               <label for="username" class="required">Nome de Usuário</label>
               <app-error-hint [refForm]="formDir" [refFormControl]="userForm.get('username')"></app-error-hint>
             </div>
 
-            <div class="md-form" [class.invalid-form-control]="formDir.submitted && userForm.get('password').invalid">
+            <div class="md-form">
               <input mdbInput type="password" id="password" class="form-control" formControlName="password" required>
               <label for="password" class="required">Senha</label>
+              <app-error-hint [refForm]="formDir" [refFormControl]="userForm.get('password')"></app-error-hint>
             </div>
 
           </mdb-card-body>

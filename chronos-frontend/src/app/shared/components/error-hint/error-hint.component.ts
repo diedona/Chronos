@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, Form } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-error-hint',
@@ -8,13 +8,25 @@ import { FormControl, Form } from '@angular/forms';
 })
 export class ErrorHintComponent implements OnInit {
 
-  @Input() refForm: Form;
+  @Input() refForm: NgForm;
   @Input() refFormControl: FormControl;
 
-  constructor() { }
+  constructor(
+
+  ) { }
 
   ngOnInit() {
     //console.log(this.refFormControl);
+  }
+
+  errorState(): boolean {
+    const isInError =
+      (
+        this.refFormControl.invalid &&
+        (this.refFormControl.dirty || this.refFormControl.touched || this.refForm.submitted)
+      );
+
+    return isInError;
   }
 
 }
