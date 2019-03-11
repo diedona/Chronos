@@ -6,9 +6,9 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, data: { title: 'Login' } },
   {
-    path: 'app', component: AppLayoutComponent,
+    path: 'app', component: AppLayoutComponent, data: { title: 'Chronos TT | ' },
     children: [
       { path: '', loadChildren: './application/application.module#ApplicationModule' }
     ]
