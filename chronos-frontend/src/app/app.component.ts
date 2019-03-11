@@ -1,7 +1,6 @@
 import { AppTitleService } from './shared/services/app-title.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
