@@ -11,6 +11,7 @@ export class ErrorHintComponent implements OnInit {
   @Input() refForm: NgForm;
   @Input() refFormControl: FormControl;
   @Output() emitterErrorState: EventEmitter<boolean> = new EventEmitter();
+  latestErrorState: boolean;
 
   constructor(
 
@@ -21,14 +22,19 @@ export class ErrorHintComponent implements OnInit {
   }
 
   errorState(): boolean {
-    const isInError =
+    const currentErrorState =
       (
         this.refFormControl.invalid &&
         (this.refFormControl.dirty || this.refFormControl.touched || this.refForm.submitted)
       );
 
-    this.emitterErrorState.emit(isInError);
-    return isInError;
+    // SE HOUVER MUDANÇA DO ESTADO, ATUALIZAR E EMITIR EVENTO
+    if (this.latestErrorState != currentErrorState) {
+      this.latestErrorState = currentErrorState;
+      this.emitterErrorState.emit(currentErrorState);
+    }
+
+    return currentErrorState;
   }
 
 }

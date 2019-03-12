@@ -28,11 +28,14 @@ export class FormGroupComponent implements OnInit, AfterContentInit, AfterViewIn
   ngAfterContentInit(): void {
     if (this.errorHint) {
       this.subscription = this.errorHint.emitterErrorState.subscribe((isOnError: boolean) => {
+        
+        //console.log('chamado', Date.now());
         if (this.showError != isOnError) {
           this.showError = isOnError;
           // https://blog.angularindepth.com/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error-e3fd9ce7dbb4
           this.cd.detectChanges();
         }
+        
       });
     }
   }
