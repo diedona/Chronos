@@ -17,13 +17,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit() {
   }
 
   onSubmit(): void {
-    if(!this.userForm.valid) {
+    if (!this.userForm.valid) {
       // TO-DO: ALERT
       return;
     }

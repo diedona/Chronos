@@ -5,8 +5,23 @@
         color: $validation-error;
     }
 
+    input[type=text]:focus:not([readonly]) + label, input[type=password]:focus:not([readonly]) + label, input[type=email]:focus:not([readonly]) + label, input[type=url]:focus:not([readonly]) + label, input[type=time]:focus:not([readonly]) + label, input[type=date]:focus:not([readonly]) + label, input[type=datetime-local]:focus:not([readonly]) + label, input[type=tel]:focus:not([readonly]) + label, input[type=number]:focus:not([readonly]) + label, input[type=search-md]:focus:not([readonly]) + label, input[type=search]:focus:not([readonly]) + label, textarea.md-textarea:focus:not([readonly]) + label {
+        color: $validation-error;
+    }
+
     input[type=text],  input[type=password],  input[type=email],  input[type=url],  input[type=time],  input[type=date],  input[type=datetime-local],  input[type=tel],  input[type=number],  input[type=search-md],  input[type=search],  textarea.md-textarea {
         color: $validation-error;
         border-bottom: 1px solid $validation-error;
     }
+
+    input[type=text]:focus:not([readonly]),  input[type=password]:focus:not([readonly]),  input[type=email]:focus:not([readonly]),  input[type=url]:focus:not([readonly]),  input[type=time]:focus:not([readonly]),  input[type=date]:focus:not([readonly]),  input[type=datetime-local]:focus:not([readonly]),  input[type=tel]:focus:not([readonly]),  input[type=number]:focus:not([readonly]),  input[type=search-md]:focus:not([readonly]),  input[type=search]:focus:not([readonly]),  textarea.md-textarea:focus:not([readonly]) {
+        box-shadow: 0 1px 0 0 $validation-error;
+        border-bottom: 1px solid $validation-error;
+    }
+}
+
+.hint-error {
+    color: $validation-error;
+    font-size: 0.8rem;
+    font-style: italic;
 }
