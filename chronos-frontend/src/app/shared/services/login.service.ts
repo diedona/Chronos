@@ -28,16 +28,15 @@ export class LoginService {
         this.currentUser = user;
         localStorage.setItem('user', JSON.stringify(this.currentUser));
       } else {
-        this.currentUser = undefined;
-        localStorage.setItem('user', null);
+        this.clearLoginData();
       }
     });
   }
 
   doLogin(email: string, password: string): Observable<boolean> {
-    const subscription = from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
+    const signinObservable = from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
     return new Observable<boolean>((res) => {
-      subscription.subscribe(user => {
+      signinObservable.subscribe(user => {
         //console.log("DEU CERTO", user);
         res.next(true);
         res.complete();
@@ -49,8 +48,27 @@ export class LoginService {
     });
   }
 
+  doLogout(): Observable<boolean> {
+    const signOutObservable = from(this.afAuth.auth.signOut());
+    return new Observable<boolean>((obs) => {
+      signOutObservable.subscribe(() => {
+        this.clearLoginData();
+        obs.next(true);
+        obs.complete();
+      }, err => {
+        obs.next(false);
+        obs.complete();
+      });
+    })
+  }
+
+  private clearLoginData() {
+    this.currentUser = null;
+    localStorage.setItem('user', null);
+  }
+
   get isLoggedIn(): boolean {
-    return (this.currentUser !== undefined);
+    return (this.currentUser !== null);
   }
 
   get displayName(): string {
