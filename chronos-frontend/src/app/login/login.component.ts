@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.userForm.value;
     this.loginService.doLogin(email, password).subscribe(data => {
       this.router.navigate(['/app/home']);
+    }, err => {
+      this.messageService.error("Combinação de email/senha não encontrados.");
     });
   }
 
