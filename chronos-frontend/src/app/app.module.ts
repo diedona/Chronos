@@ -26,7 +26,8 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({
       preventDuplicates: true,
       progressBar: true,
-      closeButton: true,
+      //closeButton: true,
+      tapToDismiss: true,
     })
   ],
   providers: [
