@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,12 @@ import { Observable } from 'rxjs';
 export class LoginService {
 
   constructor(
-    protected http: HttpClient
+    protected http: HttpClient,
+    private afAuth: AngularFireAuth
   ) { }
 
-  doLogin(username: string, password: string): Observable<any> {
-    return this.http.post("auth", {username: username, password: password});
+  doLogin(email: string, password: string): Observable<firebase.auth.UserCredential> {
+    return from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
   }
   
 }
