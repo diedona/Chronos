@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './shared/layout/layout.module';
 import { LoginModule } from './login/login.module';
 import { BaseModule } from './shared/base/base.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { BaseModule } from './shared/base/base.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     BaseModule,

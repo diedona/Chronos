@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../shared/services/login.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
@@ -28,8 +31,15 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    // TO-DO: SERVER SIDE
-    this.router.navigate(['/app/home']);
+    const { username, password } = this.userForm.value;
+    this.loginService.doLogin(username, password).subscribe(data => {
+      console.log("OK");
+      // TO-DO: SERVER SIDE
+      this.router.navigate(['/app/home']);
+    }, err => {
+      alert("SHIT HAPPENS");
+      console.log(err);
+    })
   }
 
 }
