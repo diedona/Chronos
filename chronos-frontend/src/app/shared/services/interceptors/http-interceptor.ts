@@ -2,7 +2,8 @@ import { MessagesService } from './../messages.service';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
+import { LoaderService } from '../loader.service';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
@@ -10,23 +11,42 @@ export class RequestInterceptor implements HttpInterceptor {
     private readonly baseAPIUrl = "https://localhost:4789/api";
 
     constructor(
-        public messageService: MessagesService
+        public messageService: MessagesService,
+        private loadingService: LoaderService
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+        this.showLoader();
+
         // SETS THE ROOT API URL
         req = req.clone({ url: `${this.baseAPIUrl}/${req.url}` });
 
         // GLOBAL ERROR HANDLING
         return next.handle(req).pipe(
+            tap((event: HttpEvent<any>) => {
+                if (event instanceof HttpResponse) {
+                    this.onEnd();
+                }
+            }),
             // map((event: HttpEvent<any>) => {
             //     if (event instanceof HttpResponse) {
             //         console.log("event:", event);
             //     }
             //     return event;
             // })
-            catchError(err => this.handleError(err))
+            catchError(err => {
+                this.onEnd();
+                return this.handleError(err)
+            })
         );
+    }
+
+    onEnd(): any {
+        this.loadingService.hide();
+    }
+    showLoader(): any {
+        this.loadingService.show();
     }
 
     private handleError(error: HttpErrorResponse) {
