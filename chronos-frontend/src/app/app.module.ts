@@ -10,6 +10,10 @@ import { BaseModule } from './shared/base/base.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './shared/services/interceptors/http-interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import toastrConfigurations from './shared/configurations/toastr-configurations';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -23,12 +27,9 @@ import { ToastrModule } from 'ngx-toastr';
     BaseModule,
     LayoutModule,
     LoginModule,
-    ToastrModule.forRoot({
-      preventDuplicates: true,
-      progressBar: true,
-      //closeButton: true,
-      tapToDismiss: true,
-    })
+    ToastrModule.forRoot(toastrConfigurations),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
