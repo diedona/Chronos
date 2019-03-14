@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../shared/services/login.service';
-import { catchError } from 'rxjs/operators';
 import { MessagesService } from '../shared/services/messages.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { MessagesService } from '../shared/services/messages.service';
 export class LoginComponent implements OnInit {
 
   userForm = this.fb.group({
-    username: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
 
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private loginService: LoginService,
-    private messageService: MessagesService
+    private messageService: MessagesService,
   ) { }
 
   ngOnInit() {
@@ -33,9 +32,15 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const { username, password } = this.userForm.value;
-    this.loginService.doLogin(username, password).subscribe(data => {
-      this.router.navigate(['/app/home']);
+    const { email, password } = this.userForm.value;
+    this.loginService.doLogin(email, password).subscribe(data => {
+      if(data === true) {
+        this.router.navigate(['/app/home']);
+      } else {
+        this.messageService.error("Combinação de email/senha não encontrados.");
+      }
+    }, err => {
+      this.messageService.error("Erro desconhecido!");
     });
   }
 
