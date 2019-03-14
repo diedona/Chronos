@@ -33,12 +33,9 @@ export class LoginComponent implements OnInit {
 
     const { username, password } = this.userForm.value;
     this.loginService.doLogin(username, password).subscribe(data => {
-      console.log("OK");
-      // TO-DO: SERVER SIDE
       this.router.navigate(['/app/home']);
     }, err => {
-      alert("SHIT HAPPENS");
-      console.log(err);
+      // comportamento local (se necessário)
     })
   }
 
