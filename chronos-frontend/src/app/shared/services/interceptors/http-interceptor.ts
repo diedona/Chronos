@@ -1,12 +1,17 @@
+import { MessagesService } from './../messages.service';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class RequestInterceptor implements HttpInterceptor {
 
     private readonly baseAPIUrl = "https://localhost:4789/api";
+
+    constructor(
+        public messageService: MessagesService
+    ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // SETS THE ROOT API URL
@@ -20,7 +25,7 @@ export class RequestInterceptor implements HttpInterceptor {
             //     }
             //     return event;
             // })
-            catchError(this.handleError)
+            catchError(err => this.handleError(err))
         );
     }
 
@@ -30,6 +35,7 @@ export class RequestInterceptor implements HttpInterceptor {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
             // console.error('An error occurred:', error.error.message);
+            console.log(error);
             data.type = "Cliente Side / Network";
         } else {
             // The backend returned an unsuccessful response code.
@@ -41,12 +47,14 @@ export class RequestInterceptor implements HttpInterceptor {
             data.type = "Backend Side";
         }
 
-        data.message = error && error.error.reason ? error.error.reason : '',
+        data.message = error && error.error.reason ? error.error.reason : '';
         data.status = error.status;
 
         //console.log("DATA:", data);
+        const friendlyMessage = "Um erro ocorreu! Por favor, tente novamente.";
+        this.messageService.error(friendlyMessage);
 
         // return an observable with a user-facing error message
-        return throwError("Algo deu errado, por favor, tente novamente.");
+        return throwError(friendlyMessage);
     };
 }
