@@ -2,13 +2,14 @@ import { MessagesService } from './../messages.service';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { LoaderService } from '../loader.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
 
-    private readonly baseAPIUrl = "https://localhost:4789/api";
+    private readonly baseAPIUrl = environment.baseApiURL;
 
     constructor(
         public messageService: MessagesService,
