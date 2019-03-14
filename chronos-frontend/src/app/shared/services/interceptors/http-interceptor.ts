@@ -51,7 +51,7 @@ export class RequestInterceptor implements HttpInterceptor {
         data.status = error.status;
 
         //console.log("DATA:", data);
-        const friendlyMessage = "Um erro ocorreu! Por favor, tente novamente.";
+        const friendlyMessage = "Um erro ocorreu durante a requisição! Por favor, tente novamente.";
         this.messageService.error(friendlyMessage);
 
         // return an observable with a user-facing error message

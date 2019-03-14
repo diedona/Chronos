@@ -9,6 +9,7 @@ import { LoginModule } from './login/login.module';
 import { BaseModule } from './shared/base/base.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './shared/services/interceptors/http-interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,12 @@ import { RequestInterceptor } from './shared/services/interceptors/http-intercep
     AppRoutingModule,
     BaseModule,
     LayoutModule,
-    LoginModule
+    LoginModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      progressBar: true,
+      closeButton: true,
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
