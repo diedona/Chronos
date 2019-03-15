@@ -7,7 +7,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class LoginService {
-
   private currentUser: firebase.User;
 
   // ITS SAFE TO USE LOGIN IN SERVICE'S CONSTRUCTOR
@@ -25,8 +24,7 @@ export class LoginService {
     // REFRESH DATA FOR SECURITY
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        this.currentUser = user;
-        localStorage.setItem('user', JSON.stringify(this.currentUser));
+        this.setLoginData(user);
       } else {
         this.clearLoginData();
       }
@@ -62,9 +60,30 @@ export class LoginService {
     })
   }
 
+  createLogin(email: string, password: string): Observable<boolean> {
+    const createObservable = from(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
+    return new Observable<boolean>((obs) => {
+
+      createObservable.subscribe((user: firebase.auth.UserCredential) => {
+        obs.next(true);
+        obs.complete();
+      }, (err) => {
+        //console.log("olha só", err);
+        obs.next(false);
+        obs.complete();
+      });
+
+    });
+  }
+
   private clearLoginData() {
     this.currentUser = null;
     localStorage.setItem('user', null);
+  }
+
+  private setLoginData(user: firebase.User) {
+    this.currentUser = user;
+    localStorage.setItem('user', JSON.stringify(this.currentUser));
   }
 
   get isLoggedIn(): boolean {
