@@ -31,12 +31,12 @@ export class RegistrarComponent implements OnInit {
     }
 
     const { email, password } = this.registrarForm.value;
-    this.loginService.createLogin(email, password).subscribe(status => {
+    this.loginService.createLogin(email, password).subscribe(appStatus => {
 
-      if (status === true) {
+      if (appStatus.status === true) {
         this.router.navigate(['/app/home']);
       } else {
-        this.messageService.error("Ocorreu um erro ao se registrar!");
+        this.messageService.error(appStatus.message);
       }
 
     }, (err) => {

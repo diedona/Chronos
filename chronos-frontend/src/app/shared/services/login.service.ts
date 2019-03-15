@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AppStatus } from '../interfaces/status';
 
 @Injectable({
   providedIn: 'root'
@@ -60,16 +61,16 @@ export class LoginService {
     })
   }
 
-  createLogin(email: string, password: string): Observable<boolean> {
+  createLogin(email: string, password: string): Observable<AppStatus> {
     const createObservable = from(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
-    return new Observable<boolean>((obs) => {
+    return new Observable<AppStatus>((obs) => {
 
       createObservable.subscribe((user: firebase.auth.UserCredential) => {
-        obs.next(true);
+        obs.next({ status: true, message: '' });
         obs.complete();
       }, (err) => {
-        //console.log("olha só", err);
-        obs.next(false);
+        console.log("olha só", err);
+        obs.next({ status: false, message: this.getErrorMessage(err) });
         obs.complete();
       });
 
@@ -84,6 +85,17 @@ export class LoginService {
   private setLoginData(user: firebase.User) {
     this.currentUser = user;
     localStorage.setItem('user', JSON.stringify(this.currentUser));
+  }
+
+  private getErrorMessage(err: any): string {
+    switch (err.code) {
+      case "auth/weak-password":
+        return "Senha muito simples!";
+      case "auth/email-already-in-use":
+        return "E-mail já cadastrado!";
+      default:
+        return err.message;
+    }
   }
 
   get isLoggedIn(): boolean {
