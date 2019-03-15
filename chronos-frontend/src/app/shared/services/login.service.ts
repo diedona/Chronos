@@ -32,16 +32,14 @@ export class LoginService {
     });
   }
 
-  doLogin(email: string, password: string): Observable<boolean> {
+  doLogin(email: string, password: string): Observable<AppStatus> {
     const signinObservable = from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
-    return new Observable<boolean>((res) => {
+    return new Observable<AppStatus>((res) => {
       signinObservable.subscribe(user => {
-        //console.log("DEU CERTO", user);
-        res.next(true);
+        res.next({ status: true, message: '' });
         res.complete();
       }, err => {
-        //console.log("DEU MERDA", err);
-        res.next(false);
+        res.next({ status: false, message: this.getErrorMessage(err) });
         res.complete();
       })
     });
@@ -88,11 +86,17 @@ export class LoginService {
   }
 
   private getErrorMessage(err: any): string {
+
+    //console.log(err);
+
     switch (err.code) {
       case "auth/weak-password":
         return "Senha muito simples!";
       case "auth/email-already-in-use":
         return "E-mail já cadastrado!";
+      case "auth/user-not-found":
+      case "auth/wrong-password":
+        return "Combinação de email/senha não encontrados!";
       default:
         return err.message;
     }
