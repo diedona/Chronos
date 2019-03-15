@@ -1,24 +1,22 @@
 <div class="container h-100">
-
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-11 col-md-8 col-lg-4 mx-auto">
 
-      <form [formGroup]="userForm" (submit)="onSubmit()" #formDir="ngForm">
+      <form [formGroup]="registrarForm" #formDir="ngForm" (submit)="onSubmit()">
         <mdb-card>
           <mdb-card-body>
-            <mdb-card-title class="text-center text-primary">
-              <h4>
-                <mdb-icon fas icon="hourglass" class=""></mdb-icon>
-                Chronos Time Tracker
+
+            <mdb-card-title class="text-primary">
+              <h4 class="text-center">
+                <i class="fas fa-sign-in-alt"></i> Faça seu cadastro abaixo
               </h4>
             </mdb-card-title>
-            <mdb-card-text class="text-center"> Se identifique para continuar</mdb-card-text>
 
             <app-form-group>
               <div class="md-form">
                 <input mdbInput type="text" id="email" class="form-control" formControlName="email" required>
                 <label for="email" class="required">Email</label>
-                <app-error-hint [refForm]="formDir" [refFormControl]="userForm.get('email')"></app-error-hint>
+                <app-error-hint [refForm]="formDir" [refFormControl]="registrarForm.get('email')"></app-error-hint>
               </div>
             </app-form-group>
 
@@ -26,18 +24,17 @@
               <div class="md-form">
                 <input mdbInput type="password" id="password" class="form-control" formControlName="password" required>
                 <label for="password" class="required">Senha</label>
-                <app-error-hint [refForm]="formDir" [refFormControl]="userForm.get('password')"></app-error-hint>
+                <app-error-hint [refForm]="formDir" [refFormControl]="registrarForm.get('password')"></app-error-hint>
               </div>
             </app-form-group>
 
           </mdb-card-body>
           <mdb-card-footer>
             <button mdbBtn mdbWavesEffect type="submit" size="sm" color="primary">
-              <mdb-icon fas icon="sign-in-alt" class="mr-1"></mdb-icon>Login
+              <mdb-icon fas icon="sign-in-alt" class="mr-1"></mdb-icon>Registrar
             </button>
-            <button mdbBtn mdbWavesEffect type="button" size="sm" color="primary" outline="true"
-              (click)="onRegistrar()">
-              <mdb-icon fas icon=""></mdb-icon>Registrar-se
+            <button mdbBtn mdbWavesEffect type="button" size="sm" color="primary" outline="true" (click)="onVoltar()">
+              Voltar
             </button>
           </mdb-card-footer>
         </mdb-card>
@@ -45,5 +42,4 @@
 
     </div>
   </div>
-
 </div>

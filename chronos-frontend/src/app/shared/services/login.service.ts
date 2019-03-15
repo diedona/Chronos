@@ -2,12 +2,12 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AppStatus } from '../interfaces/status';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-
   private currentUser: firebase.User;
 
   // ITS SAFE TO USE LOGIN IN SERVICE'S CONSTRUCTOR
@@ -25,24 +25,21 @@ export class LoginService {
     // REFRESH DATA FOR SECURITY
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        this.currentUser = user;
-        localStorage.setItem('user', JSON.stringify(this.currentUser));
+        this.setLoginData(user);
       } else {
         this.clearLoginData();
       }
     });
   }
 
-  doLogin(email: string, password: string): Observable<boolean> {
+  doLogin(email: string, password: string): Observable<AppStatus> {
     const signinObservable = from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
-    return new Observable<boolean>((res) => {
+    return new Observable<AppStatus>((res) => {
       signinObservable.subscribe(user => {
-        //console.log("DEU CERTO", user);
-        res.next(true);
+        res.next({ status: true, message: '' });
         res.complete();
       }, err => {
-        //console.log("DEU MERDA", err);
-        res.next(false);
+        res.next({ status: false, message: this.getErrorMessage(err) });
         res.complete();
       })
     });
@@ -62,9 +59,47 @@ export class LoginService {
     })
   }
 
+  createLogin(email: string, password: string): Observable<AppStatus> {
+    const createObservable = from(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
+    return new Observable<AppStatus>((obs) => {
+
+      createObservable.subscribe((user: firebase.auth.UserCredential) => {
+        obs.next({ status: true, message: '' });
+        obs.complete();
+      }, (err) => {
+        console.log("olha só", err);
+        obs.next({ status: false, message: this.getErrorMessage(err) });
+        obs.complete();
+      });
+
+    });
+  }
+
   private clearLoginData() {
     this.currentUser = null;
     localStorage.setItem('user', null);
+  }
+
+  private setLoginData(user: firebase.User) {
+    this.currentUser = user;
+    localStorage.setItem('user', JSON.stringify(this.currentUser));
+  }
+
+  private getErrorMessage(err: any): string {
+
+    //console.log(err);
+
+    switch (err.code) {
+      case "auth/weak-password":
+        return "Senha muito simples!";
+      case "auth/email-already-in-use":
+        return "E-mail já cadastrado!";
+      case "auth/user-not-found":
+      case "auth/wrong-password":
+        return "Combinação de email/senha não encontrados!";
+      default:
+        return err.message;
+    }
   }
 
   get isLoggedIn(): boolean {

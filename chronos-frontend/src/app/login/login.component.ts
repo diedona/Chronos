@@ -34,14 +34,18 @@ export class LoginComponent implements OnInit {
 
     const { email, password } = this.userForm.value;
     this.loginService.doLogin(email, password).subscribe(data => {
-      if(data === true) {
+      if (data.status === true) {
         this.router.navigate(['/app/home']);
       } else {
-        this.messageService.error("Combinação de email/senha não encontrados.");
+        this.messageService.error(data.message);
       }
     }, err => {
       this.messageService.error("Erro desconhecido!");
     });
+  }
+
+  onRegistrar(): void {
+    this.router.navigate(['/registrar']);
   }
 
 }
