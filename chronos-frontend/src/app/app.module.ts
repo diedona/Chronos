@@ -14,10 +14,12 @@ import toastrConfigurations from './shared/configurations/toastr-configurations'
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegistrarComponent
   ],
   imports: [
     BrowserModule,
