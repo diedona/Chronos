@@ -1,4 +1,9 @@
 <div class="hint-error" *ngIf="errorState()">
+  <!-- <div>
+    {{refFormControl.errors | json}}
+  </div> -->
   <span *ngIf="refFormControl.errors.required">Campo Obrigatório!</span>  
   <span *ngIf="refFormControl.errors.email">E-mail inválido!</span>  
+  <span *ngIf="refFormControl.errors.minlength">
+    Digite ao menos <strong>{{refFormControl.errors.minlength.requiredLength}}</strong> caracteres! (contém <strong>{{refFormControl.errors.minlength.actualLength}}</strong>)</span>  
 </div>
