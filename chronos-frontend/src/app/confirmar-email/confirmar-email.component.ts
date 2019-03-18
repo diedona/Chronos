@@ -16,6 +16,10 @@ export class ConfirmarEmailComponent implements OnInit {
     this.loginService.sendVerificationEmail();
   }
 
+  get nome(): string {
+    return this.loginService.displayName || this.loginService.displayEmail;
+  }
+
   get email(): string {
     return this.loginService.displayEmail;
   }

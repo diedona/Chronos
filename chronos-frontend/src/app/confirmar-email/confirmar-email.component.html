@@ -1,19 +1,28 @@
-<div class="container h-100 mt-1">
-  <div class="row col-12">
-    <h3>Meu querido {{email}},</h3>
-  </div>
-  <div class="row col">
-    <p>
-      Notamos que seu e-mail ainda não foi verificado no sistema.
-    </p>
-    <p>
-      Para resolver isso, acabamos de enviar um e-mail de verificação quentinho para sua caixa de e-mail ({{email}}).
-    </p>
-    <p>
-      Neste e-mail constam mais instruções para que você possa concluir a verificação!
-    </p>
-  </div>
-  <div class="row col">
-      <a mdbBtn mdbWavesEffect [routerLink]="['/login']" color="primary">Voltar</a>
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark blue scrolling-navbar text-white">
+    <div class="container">
+      <div class="mx-auto">
+        <h3>Olá {{nome}}, precisamos de sua ajuda!</h3>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="container margin-header">
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <p>
+        Notamos que seu e-mail ainda não foi verificado no sistema.
+      </p>
+      <p>
+        Para resolver isso, acabamos de enviar um e-mail de verificação quentinho para sua caixa de e-mail <strong>({{email}}</strong>).
+        Neste e-mail você receberá um link para verificar sua conta. Após clicar no link, volte à aplicação e faça o login novamente!
+      </p>
+      <p>
+        <i>Como nosso entregador de e-mails é o Jaiminho, pode ser que o e-mail demore de 5 a 10 minutos para chegar. Fique atento à sua caixa de entrada!</i>
+      </p>
+      <p>
+        <a mdbBtn mdbWavesEffect [routerLink]="['/login']" color="primary" size="md">Voltar</a>
+      </p>
+    </div>
   </div>
 </div>
