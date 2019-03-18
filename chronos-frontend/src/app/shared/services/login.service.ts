@@ -8,6 +8,7 @@ import { AppStatus } from '../interfaces/status';
   providedIn: 'root'
 })
 export class LoginService {
+  
   private currentUser: firebase.User;
 
   // ITS SAFE TO USE LOGIN IN SERVICE'S CONSTRUCTOR
@@ -75,6 +76,10 @@ export class LoginService {
     });
   }
 
+  sendVerificationEmail(): void {
+    this.afAuth.auth.currentUser.sendEmailVerification();
+  }
+
   private clearLoginData() {
     this.currentUser = null;
     localStorage.setItem('user', null);
@@ -106,11 +111,27 @@ export class LoginService {
     return (this.currentUser !== null);
   }
 
-  get displayName(): string {
+  get displayEmail(): string {
     if (this.isLoggedIn) {
       return this.currentUser.email;
     } else {
       return '';
+    }
+  }
+
+  get displayName(): string {
+    if (this.isLoggedIn) {
+      return this.currentUser.displayName;
+    } else {
+      return '';
+    }
+  }
+
+  get isEmailConfirmed(): boolean {
+    if (!this.isLoggedIn) {
+      return false;
+    } else {
+      return this.currentUser.emailVerified;
     }
   }
 
