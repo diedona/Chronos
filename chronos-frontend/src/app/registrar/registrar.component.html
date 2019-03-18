@@ -14,6 +14,14 @@
 
             <app-form-group>
               <div class="md-form">
+                <input mdbInput type="text" id="nome" class="form-control" formControlName="nome" required>
+                <label for="nome" class="required">Nome</label>
+                <app-error-hint [refForm]="formDir" [refFormControl]="registrarForm.get('nome')"></app-error-hint>
+              </div>
+            </app-form-group>
+
+            <app-form-group>
+              <div class="md-form">
                 <input mdbInput type="text" id="email" class="form-control" formControlName="email" required>
                 <label for="email" class="required">Email</label>
                 <app-error-hint [refForm]="formDir" [refFormControl]="registrarForm.get('email')"></app-error-hint>

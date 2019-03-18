@@ -34,8 +34,8 @@ export class RegistrarComponent implements OnInit {
 
     this.loadingService.show();
 
-    const { email, password } = this.registrarForm.value;
-    this.loginService.createLogin(email, password).subscribe(appStatus => {
+    const { nome, email, password } = this.registrarForm.value;
+    this.loginService.createLogin(nome, email, password).subscribe(appStatus => {
 
       this.loadingService.hide();
       if (appStatus.status === true) {
@@ -56,6 +56,7 @@ export class RegistrarComponent implements OnInit {
 
   private criarForm(): FormGroup {
     return this.fb.group({
+      nome: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });

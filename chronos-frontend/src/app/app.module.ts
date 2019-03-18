@@ -15,11 +15,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { ConfirmarEmailComponent } from './confirmar-email/confirmar-email.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrarComponent
+    RegistrarComponent,
+    ConfirmarEmailComponent
   ],
   imports: [
     BrowserModule,

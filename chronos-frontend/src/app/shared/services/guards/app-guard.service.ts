@@ -17,7 +17,14 @@ export class AppGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     
     if(this.loginService.isLoggedIn) {
-      return true;
+      
+      if(this.loginService.isEmailConfirmed){
+        return true;
+      } else {
+        this.router.navigate(["/confirmar-email"]);
+        return false;
+      }
+
     }
 
     this.router.navigate(["/login"]);

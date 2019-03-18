@@ -8,6 +8,7 @@ import { AppStatus } from '../interfaces/status';
   providedIn: 'root'
 })
 export class LoginService {
+
   private currentUser: firebase.User;
 
   // ITS SAFE TO USE LOGIN IN SERVICE'S CONSTRUCTOR
@@ -36,6 +37,7 @@ export class LoginService {
     const signinObservable = from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
     return new Observable<AppStatus>((res) => {
       signinObservable.subscribe(user => {
+        this.setLoginData(user.user);
         res.next({ status: true, message: '' });
         res.complete();
       }, err => {
@@ -59,19 +61,36 @@ export class LoginService {
     })
   }
 
-  createLogin(email: string, password: string): Observable<AppStatus> {
+  createLogin(nome: string, email: string, password: string): Observable<AppStatus> {
     const createObservable = from(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
     return new Observable<AppStatus>((obs) => {
 
       createObservable.subscribe((user: firebase.auth.UserCredential) => {
+        user.user.updateProfile({ displayName: nome }); // TO-DO: observe this promise
         obs.next({ status: true, message: '' });
         obs.complete();
       }, (err) => {
-        console.log("olha só", err);
+        //console.log("olha só", err);
         obs.next({ status: false, message: this.getErrorMessage(err) });
         obs.complete();
       });
 
+    });
+  }
+
+  sendVerificationEmail(): Observable<void> {
+    return new Observable<void>(obs => {
+      this.afAuth.authState.subscribe(user => {
+        if (user.emailVerified === false) {
+          user.sendEmailVerification().then(() => {
+            obs.next();
+            obs.complete();
+          })
+        } else {
+          obs.next();
+          obs.complete();
+        }
+      });
     });
   }
 
@@ -106,11 +125,27 @@ export class LoginService {
     return (this.currentUser !== null);
   }
 
-  get displayName(): string {
+  get displayEmail(): string {
     if (this.isLoggedIn) {
       return this.currentUser.email;
     } else {
       return '';
+    }
+  }
+
+  get displayName(): string {
+    if (this.isLoggedIn) {
+      return this.currentUser.displayName;
+    } else {
+      return '';
+    }
+  }
+
+  get isEmailConfirmed(): boolean {
+    if (!this.isLoggedIn) {
+      return false;
+    } else {
+      return this.currentUser.emailVerified;
     }
   }
 
