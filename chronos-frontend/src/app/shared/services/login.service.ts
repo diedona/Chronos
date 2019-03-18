@@ -8,7 +8,7 @@ import { AppStatus } from '../interfaces/status';
   providedIn: 'root'
 })
 export class LoginService {
-  
+
   private currentUser: firebase.User;
 
   // ITS SAFE TO USE LOGIN IN SERVICE'S CONSTRUCTOR
@@ -37,6 +37,7 @@ export class LoginService {
     const signinObservable = from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
     return new Observable<AppStatus>((res) => {
       signinObservable.subscribe(user => {
+        this.setLoginData(user.user);
         res.next({ status: true, message: '' });
         res.complete();
       }, err => {
@@ -65,7 +66,7 @@ export class LoginService {
     return new Observable<AppStatus>((obs) => {
 
       createObservable.subscribe((user: firebase.auth.UserCredential) => {
-        user.user.updateProfile({displayName: nome}); // TO-DO: observe this promise
+        user.user.updateProfile({ displayName: nome }); // TO-DO: observe this promise
         obs.next({ status: true, message: '' });
         obs.complete();
       }, (err) => {
@@ -77,8 +78,20 @@ export class LoginService {
     });
   }
 
-  sendVerificationEmail(): void {
-    this.afAuth.auth.currentUser.sendEmailVerification();
+  sendVerificationEmail(): Observable<void> {
+    return new Observable<void>(obs => {
+      this.afAuth.authState.subscribe(user => {
+        if (user.emailVerified === false) {
+          user.sendEmailVerification().then(() => {
+            obs.next();
+            obs.complete();
+          })
+        } else {
+          obs.next();
+          obs.complete();
+        }
+      });
+    });
   }
 
   private clearLoginData() {

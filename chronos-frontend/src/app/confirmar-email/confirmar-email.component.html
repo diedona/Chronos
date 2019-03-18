@@ -14,14 +14,14 @@
         Notamos que seu e-mail ainda não foi verificado no sistema.
       </p>
       <p>
-        Para resolver isso, acabamos de enviar um e-mail de verificação quentinho para sua caixa de e-mail <strong>({{email}}</strong>).
+        Para resolver isso, vamos enviar um e-mail de verificação quentinho para sua caixa de e-mail <strong>({{email}}</strong>).
         Neste e-mail você receberá um link para verificar sua conta. Após clicar no link, volte à aplicação e faça o login novamente!
       </p>
       <p>
         <i>Como nosso entregador de e-mails é o Jaiminho, pode ser que o e-mail demore de 5 a 10 minutos para chegar. Fique atento à sua caixa de entrada!</i>
       </p>
       <p>
-        <a mdbBtn mdbWavesEffect [routerLink]="['/login']" color="primary" size="md">Voltar</a>
+        <button type="button" mdbBtn mdbWavesEffect (click)="onVoltar()" color="primary" size="md">Enviar E-Mail de Verificação</button>
       </p>
     </div>
   </div>
