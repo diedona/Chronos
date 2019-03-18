@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, from, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AppStatus } from '../interfaces/status';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -65,12 +66,14 @@ export class LoginService {
     const createObservable = from(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
     return new Observable<AppStatus>((obs) => {
 
-      createObservable.subscribe((user: firebase.auth.UserCredential) => {
-        user.user.updateProfile({ displayName: nome }); // TO-DO: observe this promise
+      createObservable.pipe(
+        mergeMap(user => {
+          return from(user.user.updateProfile({ displayName: nome }));
+        })
+      ).subscribe(() => {
         obs.next({ status: true, message: '' });
         obs.complete();
-      }, (err) => {
-        //console.log("olha só", err);
+      }, err => {
         obs.next({ status: false, message: this.getErrorMessage(err) });
         obs.complete();
       });
