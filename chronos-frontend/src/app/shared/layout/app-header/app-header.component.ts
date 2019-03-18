@@ -30,7 +30,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   name(): string {
-    return this.loginService.displayName;
+    return this.loginService.displayName || this.loginService.displayEmail;
   }
 
 }
