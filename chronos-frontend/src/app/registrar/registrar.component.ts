@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessagesService } from '../shared/services/messages.service';
 import { LoginService } from '../shared/services/login.service';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'app-registrar',
@@ -17,7 +18,8 @@ export class RegistrarComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private messageService: MessagesService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private loadingService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -30,9 +32,12 @@ export class RegistrarComponent implements OnInit {
       return;
     }
 
+    this.loadingService.show();
+
     const { email, password } = this.registrarForm.value;
     this.loginService.createLogin(email, password).subscribe(appStatus => {
 
+      this.loadingService.hide();
       if (appStatus.status === true) {
         this.router.navigate(['/app/home']);
       } else {
@@ -40,6 +45,7 @@ export class RegistrarComponent implements OnInit {
       }
 
     }, (err) => {
+      this.loadingService.hide();
       this.messageService.error("Ocorreu um erro desconhecido!");
     })
   }

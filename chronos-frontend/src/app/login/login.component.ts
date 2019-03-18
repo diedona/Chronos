@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../shared/services/login.service';
 import { MessagesService } from '../shared/services/messages.service';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private messageService: MessagesService,
+    private loadingService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -32,14 +34,18 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.loadingService.show();
+
     const { email, password } = this.userForm.value;
     this.loginService.doLogin(email, password).subscribe(data => {
+      this.loadingService.hide();
       if (data.status === true) {
         this.router.navigate(['/app/home']);
       } else {
         this.messageService.error(data.message);
       }
     }, err => {
+      this.loadingService.hide();
       this.messageService.error("Erro desconhecido!");
     });
   }
