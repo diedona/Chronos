@@ -15,11 +15,16 @@ export class AppVerifyEmailGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (this.loginService.isEmailConfirmed === false) {
-      return true;
-    } else {
+    if (!this.loginService.isLoggedIn) {
+      // NÃO ESTÁ LOGADO
       this.router.navigate(['/login']);
       return false;
+    } else if (this.loginService.isEmailConfirmed === true) {
+      // ESTÁ LOGADO E O EMAIL JÁ FOI CONFIRMADO
+      this.router.navigate(['/app/home']);
+      return false;
+    } else {
+      return true;
     }
 
   }
