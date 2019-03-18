@@ -60,15 +60,16 @@ export class LoginService {
     })
   }
 
-  createLogin(email: string, password: string): Observable<AppStatus> {
+  createLogin(nome: string, email: string, password: string): Observable<AppStatus> {
     const createObservable = from(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
     return new Observable<AppStatus>((obs) => {
 
       createObservable.subscribe((user: firebase.auth.UserCredential) => {
+        user.user.updateProfile({displayName: nome}); // TO-DO: observe this promise
         obs.next({ status: true, message: '' });
         obs.complete();
       }, (err) => {
-        console.log("olha só", err);
+        //console.log("olha só", err);
         obs.next({ status: false, message: this.getErrorMessage(err) });
         obs.complete();
       });
