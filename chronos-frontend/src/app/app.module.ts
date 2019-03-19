@@ -13,6 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import toastrConfigurations from './shared/configurations/toastr-configurations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { ConfirmarEmailComponent } from './confirmar-email/confirmar-email.component';
@@ -33,7 +34,8 @@ import { ConfirmarEmailComponent } from './confirmar-email/confirmar-email.compo
     LoginModule,
     ToastrModule.forRoot(toastrConfigurations),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
