@@ -152,4 +152,12 @@ export class LoginService {
     }
   }
 
+  get userId(): string {
+    if(!this.isLoggedIn) {
+      return null;
+    } else {
+      return this.currentUser.uid;
+    }
+  }
+
 }

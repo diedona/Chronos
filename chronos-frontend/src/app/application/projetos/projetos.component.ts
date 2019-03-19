@@ -68,6 +68,19 @@ export class ProjetosComponent implements OnInit {
       this.messageService.error("Cheque o formulário!");
       return;
     }
+
+    const projetoNovo = this.frmProjeto.value as Projeto;
+    this.projetosService.criarProjeto(projetoNovo).subscribe((ok) => {
+      if (ok) {
+        // limpa interface
+        this.onCancelarProjeto();
+      } else {
+        this.messageService.error("Ocorreu um erro ao salvar o projeto!")
+      }
+    }, err => {
+      console.error("erro desconhecido:", err);
+      this.messageService.error("Ocorreu um erro desconhecido!")
+    })
   }
 
   private criarFrmProjeto(): FormGroup {
