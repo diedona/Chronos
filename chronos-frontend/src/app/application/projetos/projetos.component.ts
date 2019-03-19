@@ -1,3 +1,4 @@
+import { LoaderService } from './../../shared/services/loader.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ProjetosService } from 'src/app/shared/services/projetos.service';
@@ -20,7 +21,8 @@ export class ProjetosComponent implements OnInit {
   constructor(
     private projetosService: ProjetosService,
     private messageService: MessagesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class ProjetosComponent implements OnInit {
   }
 
   onDeletar(projeto: Projeto): void {
+
     this.projetosService.deleteProjeto(projeto).subscribe(() => {
       this.projetoSelecionado = undefined;
     }, err => {
