@@ -1,18 +1,31 @@
 <div class="row">
 
   <!-- MASTER -->
-  <div class="col-sm-4">
+  <div class="col-md-4 mb-5">
 
     <div class="card">
-      <ul class="list-group list-group-flush" *ngFor="let projeto of projetosList | async as list">
-        <li class="list-group-item hand-over" (click)="onClickProjeto(projeto)">{{projeto.titulo}}</li>
+      <ul class="list-group list-group-flush"  *ngFor="let projeto of projetosList | async as list">
+        <li class="list-group-item hand-over" [class.active]="isProjetoSelecionado(projeto)" (click)="onClickProjeto(projeto)">{{projeto.titulo}}</li>
       </ul>
     </div>
 
   </div>
 
   <!-- DETAIL -->
-  <div class="col-sm-8">
+  <div class="col-md-8" *ngIf="projetoSelecionado">
+
+    <div class="card">
+      <div class="card-body">
+        <h3>{{projetoSelecionado.titulo}}</h3>
+        <hr />
+        <p class="card-text">
+          {{projetoSelecionado.descricao}}
+        </p>
+      </div>
+      <div class="card-footer">
+        <em>Criado em {{projetoSelecionado.dtCriacao.toDate() | date:'dd/MM/yyyy'}}</em>
+      </div>
+    </div>
 
   </div>
 </div>

@@ -11,6 +11,7 @@ import { Projeto } from 'src/app/shared/interfaces/db/projeto';
 export class ProjetosComponent implements OnInit {
 
   projetosList: Observable<Projeto[]>;
+  projetoSelecionado: Projeto;
 
   constructor(
     private projetosService: ProjetosService
@@ -21,7 +22,15 @@ export class ProjetosComponent implements OnInit {
   }
 
   onClickProjeto(projeto: Projeto) {
-    console.log(projeto, projeto.dtCriacao.toDate());
+    this.projetoSelecionado = projeto;
+  }
+
+  isProjetoSelecionado(projetoLinha: Projeto): boolean {
+    if(!this.projetoSelecionado) {
+      return false;
+    } else {
+      return (this.projetoSelecionado.id === projetoLinha.id)
+    }
   }
 
 }
