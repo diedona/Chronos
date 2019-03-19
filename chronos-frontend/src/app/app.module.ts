@@ -10,13 +10,21 @@ import { BaseModule } from './shared/base/base.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './shared/services/interceptors/http-interceptor';
 import { ToastrModule } from 'ngx-toastr';
-import toastrConfigurations from './shared/configurations/toastr-configurations';
+//import toastrConfigurations from './shared/configurations/toastr-configurations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { ConfirmarEmailComponent } from './confirmar-email/confirmar-email.component';
+
+const toastrConfigurations = {
+  preventDuplicates: true,
+  progressBar: true,
+  //closeButton: true,
+  tapToDismiss: true,
+  //toastClass: 'ngx-toastr ngx-toastr-fix'
+};
 
 @NgModule({
   declarations: [
@@ -35,7 +43,7 @@ import { ConfirmarEmailComponent } from './confirmar-email/confirmar-email.compo
     ToastrModule.forRoot(toastrConfigurations),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFirestoreModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }

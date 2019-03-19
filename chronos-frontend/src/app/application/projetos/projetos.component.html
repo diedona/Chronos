@@ -1,3 +1,93 @@
-<p>
-  projetos works!
-</p>
+<div class="row">
+
+  <!-- MASTER -->
+  <div class="col-md-4 mb-5">
+
+    <p>
+      Seus projetos:
+    </p>
+
+    <hr />
+
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item hand-over" *ngFor="let projeto of projetosList | async as list"
+          [class.active]="isProjetoSelecionado(projeto)" (click)="onClickProjeto(projeto)">{{projeto.titulo}}</li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item hand-over bg-default text-white" (click)="onClickCriarProjeto()" mdbWavesEffect>
+          <i class="fas fa-plus"></i> Criar novo projeto
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- DETAIL -->
+  <div class="col-md-8" *ngIf="projetoSelecionado">
+
+    <div class="card">
+      <div class="card-body">
+        <h3>{{projetoSelecionado.titulo}}</h3>
+        <hr />
+        <p class="card-text">
+          {{projetoSelecionado.descricao}}
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="float-right">
+          <!-- <button class="btn btn-sm btn-link">Excluir</button> -->
+          <button mdbBtn mdbWavesEffect type="button" size="sm" color="danger" (click)="onDeletar(projetoSelecionado)">
+            <i class="fas fa-minus-circle"></i>
+          </button>
+        </div>
+        <em>Criado em {{projetoSelecionado.dtCriacao.toDate() | date:'dd/MM/yyyy'}}</em>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FORM -->
+  <div class="col-md-8" *ngIf="criarProjeto">
+    <form [formGroup]="frmProjeto" #formDir="ngForm" (submit)="onSubmit()">
+
+      <div class="card">
+        <div class="card-body">
+
+          <app-form-group>
+            <div class="md-form">
+              <input mdbInput type="text" id="titulo" class="form-control" formControlName="titulo" required>
+              <label for="titulo" class="required">Título</label>
+              <app-error-hint [refForm]="formDir" [refFormControl]="frmProjeto.get('titulo')"></app-error-hint>
+            </div>
+          </app-form-group>
+
+          <app-form-group>
+            <div class="md-form">
+              <textarea mdbInput id="descricao" class="md-textarea form-control" formControlName="descricao"></textarea>
+              <label for="descricao" class="required">Descrição</label>
+              <app-error-hint [refForm]="formDir" [refFormControl]="frmProjeto.get('descricao')"></app-error-hint>
+            </div>
+          </app-form-group>
+
+        </div>
+        <div class="card-footer">
+
+          <button mdbBtn mdbWavesEffect type="submit" size="sm" color="primary">
+            Salvar
+          </button>
+          <button mdbBtn mdbWavesEffect type="button" size="sm" color="primary" (click)="onCancelarProjeto()" outline="true">
+            Cancelar
+          </button>
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
