@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Projeto } from '../interfaces/db/projeto';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -46,6 +46,11 @@ export class ProjetosService {
         })
       })
     );
+  }
+
+  deleteProjeto(projeto: Projeto): Observable<void> {
+    const refProjeto = this.db.doc<Projeto>(`projetos/${projeto.id}`);
+    return from(refProjeto.delete());
   }
 
 

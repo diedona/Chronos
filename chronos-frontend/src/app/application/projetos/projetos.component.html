@@ -4,8 +4,9 @@
   <div class="col-md-4 mb-5">
 
     <div class="card">
-      <ul class="list-group list-group-flush"  *ngFor="let projeto of projetosList | async as list">
-        <li class="list-group-item hand-over" [class.active]="isProjetoSelecionado(projeto)" (click)="onClickProjeto(projeto)">{{projeto.titulo}}</li>
+      <ul class="list-group list-group-flush" *ngFor="let projeto of projetosList | async as list">
+        <li class="list-group-item hand-over" [class.active]="isProjetoSelecionado(projeto)"
+          (click)="onClickProjeto(projeto)">{{projeto.titulo}}</li>
       </ul>
     </div>
 
@@ -23,6 +24,12 @@
         </p>
       </div>
       <div class="card-footer">
+        <div class="float-right">
+          <!-- <button class="btn btn-sm btn-link">Excluir</button> -->
+          <button mdbBtn mdbWavesEffect type="button" size="sm" color="danger" (click)="onDeletar(projetoSelecionado)">
+            <i class="fas fa-minus-circle"></i>
+          </button>
+        </div>
         <em>Criado em {{projetoSelecionado.dtCriacao.toDate() | date:'dd/MM/yyyy'}}</em>
       </div>
     </div>
