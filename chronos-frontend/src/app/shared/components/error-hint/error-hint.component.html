@@ -5,5 +5,9 @@
   <span *ngIf="refFormControl.errors.required">Campo Obrigatório!</span>  
   <span *ngIf="refFormControl.errors.email">E-mail inválido!</span>  
   <span *ngIf="refFormControl.errors.minlength">
-    Digite ao menos <strong>{{refFormControl.errors.minlength.requiredLength}}</strong> caracteres! (contém <strong>{{refFormControl.errors.minlength.actualLength}}</strong>)</span>  
+    Digite ao menos <strong>{{refFormControl.errors.minlength.requiredLength}}</strong> caracteres! (contém <strong>{{refFormControl.errors.minlength.actualLength}}</strong>)
+  </span>  
+  <span *ngIf="refFormControl.errors.maxlength">
+      Máximo de <strong>{{refFormControl.errors.maxlength.requiredLength}}</strong> caracteres! (contém <strong>{{refFormControl.errors.maxlength.actualLength}}</strong>)
+  </span>
 </div>

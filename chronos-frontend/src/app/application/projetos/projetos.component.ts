@@ -38,6 +38,8 @@ export class ProjetosComponent implements OnInit {
     this.projetoSelecionado = projeto;
     this.criarProjeto = false;
     
+    // VIEW CHILD TAKES A CYCLE TO BE DEFINED (because of *ngIf)
+    // WORKAROUND...
     setTimeout(() => {
       (this.divDetail.nativeElement as HTMLElement).scrollIntoView({  behavior: "smooth", block: "end" });
     },0);
@@ -128,8 +130,8 @@ export class ProjetosComponent implements OnInit {
 
   private criarFrmProjeto(): FormGroup {
     return this.fb.group({
-      titulo: ['', [Validators.required]],
-      descricao: ['', [Validators.required]]
+      titulo: ['', [Validators.required, Validators.maxLength(50)]],
+      descricao: ['', [Validators.required, Validators.maxLength(500)]]
     });
   }
 
