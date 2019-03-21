@@ -1,3 +1,4 @@
+import { AppLoginGuardService } from './shared/services/guards/app-login-guard.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppLayoutComponent } from './shared/layout/app-layout/app-layout.component';
@@ -10,10 +11,11 @@ import { AppVerifyEmailGuardService } from './shared/services/guards/app-verify-
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: LoginComponent, data: { title: 'Login' } },
+  { path: 'login', component: LoginComponent, data: { title: 'Login' }, canActivate: [AppLoginGuardService] },
   { path: 'registrar', component: RegistrarComponent, data: { title: 'Registrar' } },
-  { path: 'confirmar-email', 
-    component: ConfirmarEmailComponent, 
+  {
+    path: 'confirmar-email',
+    component: ConfirmarEmailComponent,
     data: { title: 'Confirmar E-mail' },
     canActivate: [AppVerifyEmailGuardService],
   },
