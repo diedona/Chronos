@@ -1,6 +1,6 @@
 import { LoaderService } from './../../shared/services/loader.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ContentChild } from '@angular/core';
 import { ProjetosService } from 'src/app/shared/services/projetos.service';
 import { Observable } from 'rxjs';
 import { Projeto } from 'src/app/shared/interfaces/db/projeto';
@@ -18,6 +18,11 @@ export class ProjetosComponent implements OnInit {
   criarProjeto: boolean = false;
   frmProjeto: FormGroup;
 
+  private divDetail: ElementRef;
+  @ViewChild('divDetail') set content(content: ElementRef) {
+    this.divDetail = content;
+  }
+
   constructor(
     private projetosService: ProjetosService,
     private messageService: MessagesService,
@@ -32,6 +37,10 @@ export class ProjetosComponent implements OnInit {
   onClickProjeto(projeto: Projeto) {
     this.projetoSelecionado = projeto;
     this.criarProjeto = false;
+    
+    setTimeout(() => {
+      (this.divDetail.nativeElement as HTMLElement).scrollIntoView({  behavior: "smooth", block: "end" });
+    },0);
   }
 
   isProjetoSelecionado(projetoLinha: Projeto): boolean {
