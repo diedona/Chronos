@@ -66,23 +66,54 @@ export class ProjetosComponent implements OnInit {
     this.frmProjeto = undefined;
   }
 
+  onUpdate(projeto: Projeto): void {
+    this.projetoSelecionado = projeto;
+    this.criarProjeto = true;
+    this.frmProjeto = this.criarFrmProjeto();
+    this.frmProjeto.patchValue(projeto);
+  }
+
   onSubmit(): void {
     if (this.frmProjeto.invalid) {
       this.messageService.error("Cheque o formulário!");
       return;
     }
 
+    let observable;
     const projetoNovo = this.frmProjeto.value as Projeto;
-    this.projetosService.criarProjeto(projetoNovo).subscribe((ok) => {
+
+    if (this.projetoSelecionado) {
+      projetoNovo.dtCriacao = this.projetoSelecionado.dtCriacao;
+      projetoNovo.userId = this.projetoSelecionado.userId;
+      observable = this.projetosService.atualizarProjeto(this.projetoSelecionado.id, projetoNovo);
+    } else {
+      observable = this.projetosService.criarProjeto(projetoNovo);
+    }
+
+    observable.subscribe((ok) => {
       if (ok) {
+
         // limpa interface
         this.onCancelarProjeto();
+
+        if (this.projetoSelecionado) {
+          this.atualizarProjetoSelecionado();
+        }
+
       } else {
         this.messageService.error("Ocorreu um erro ao salvar o projeto!")
       }
     }, err => {
       console.error("erro desconhecido:", err);
       this.messageService.error("Ocorreu um erro desconhecido!")
+    })
+  }
+
+  private atualizarProjetoSelecionado() {
+    this.projetosService.getById(this.projetoSelecionado.id).subscribe(prj => {
+      this.projetoSelecionado = prj;
+    }, err => {
+      this.projetoSelecionado = undefined;
     })
   }
 

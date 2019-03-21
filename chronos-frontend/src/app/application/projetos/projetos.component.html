@@ -29,7 +29,7 @@
   </div>
 
   <!-- DETAIL -->
-  <div class="col-md-8" *ngIf="projetoSelecionado">
+  <div class="col-md-8" *ngIf="projetoSelecionado && (!criarProjeto)">
 
     <div class="card">
       <div class="card-body">
@@ -38,15 +38,18 @@
         <p class="card-text">
           {{projetoSelecionado.descricao}}
         </p>
+        <hr />
+        <em>Criado em {{projetoSelecionado.dtCriacao.toDate() | date:'dd/MM/yyyy'}}</em>
       </div>
       <div class="card-footer">
-        <div class="float-right">
-          <!-- <button class="btn btn-sm btn-link">Excluir</button> -->
+        <div class="">
+          <button mdbBtn mdbWavesEffect type="button" size="sm" color="primary" (click)="onUpdate(projetoSelecionado)">
+            <i class="fas fa-edit"></i>
+          </button>
           <button mdbBtn mdbWavesEffect type="button" size="sm" color="danger" (click)="onDeletar(projetoSelecionado)">
             <i class="fas fa-minus-circle"></i>
           </button>
         </div>
-        <em>Criado em {{projetoSelecionado.dtCriacao.toDate() | date:'dd/MM/yyyy'}}</em>
       </div>
     </div>
 
@@ -81,7 +84,8 @@
           <button mdbBtn mdbWavesEffect type="submit" size="sm" color="primary">
             Salvar
           </button>
-          <button mdbBtn mdbWavesEffect type="button" size="sm" color="primary" (click)="onCancelarProjeto()" outline="true">
+          <button mdbBtn mdbWavesEffect type="button" size="sm" color="primary" (click)="onCancelarProjeto()"
+            outline="true">
             Cancelar
           </button>
 
