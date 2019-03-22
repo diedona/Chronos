@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Projeto } from '../interfaces/db/projeto';
 import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators'; 3
+import { map } from 'rxjs/operators'; 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 

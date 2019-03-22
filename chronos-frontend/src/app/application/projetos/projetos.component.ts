@@ -31,18 +31,20 @@ export class ProjetosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loaderService.show();
     this.projetosList = this.projetosService.getAllOrderByDate();
+    this.projetosList.subscribe(() => { this.loaderService.hide() });
   }
 
   onClickProjeto(projeto: Projeto) {
     this.projetoSelecionado = projeto;
     this.criarProjeto = false;
-    
+
     // VIEW CHILD TAKES A CYCLE TO BE DEFINED (because of *ngIf)
     // WORKAROUND...
     setTimeout(() => {
-      (this.divDetail.nativeElement as HTMLElement).scrollIntoView({  behavior: "smooth", block: "end" });
-    },0);
+      (this.divDetail.nativeElement as HTMLElement).scrollIntoView({ behavior: "smooth", block: "end" });
+    }, 0);
   }
 
   isProjetoSelecionado(projetoLinha: Projeto): boolean {
@@ -55,8 +57,10 @@ export class ProjetosComponent implements OnInit {
 
   onDeletar(projeto: Projeto): void {
 
+    this.loaderService.show();
     this.projetosService.deleteProjeto(projeto).subscribe(() => {
       this.projetoSelecionado = undefined;
+      this.loaderService.hide();
     }, err => {
       this.messageService.error("Ocorreu um erro ao deletar");
     })
@@ -101,9 +105,11 @@ export class ProjetosComponent implements OnInit {
       observable = this.projetosService.criarProjeto(projetoNovo);
     }
 
+    this.loaderService.show();
     observable.subscribe((ok) => {
       if (ok) {
 
+        this.loaderService.hide();
         // limpa interface
         this.onCancelarProjeto();
 
@@ -112,6 +118,7 @@ export class ProjetosComponent implements OnInit {
         }
 
       } else {
+        this.loaderService.hide();
         this.messageService.error("Ocorreu um erro ao salvar o projeto!")
       }
     }, err => {
@@ -121,9 +128,12 @@ export class ProjetosComponent implements OnInit {
   }
 
   private atualizarProjetoSelecionado() {
+    this.loaderService.show();
     this.projetosService.getById(this.projetoSelecionado.id).subscribe(prj => {
+      this.loaderService.hide();
       this.projetoSelecionado = prj;
     }, err => {
+      this.loaderService.hide();
       this.projetoSelecionado = undefined;
     })
   }
